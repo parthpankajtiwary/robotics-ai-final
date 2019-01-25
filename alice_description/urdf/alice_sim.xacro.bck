@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<robot name="alice" xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller" xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor" xmlns:xacro="http://ros.org/wiki/xacro">
+
+<xacro:property name="M_PI" value="3.1415926535897931"/>
+<xacro:property name="DEG2RAD" value="0.017453292" />
+
+<xacro:property name="dynamixel_height" value="0.04" />
+<xacro:property name="dynamixel_width" value="0.032" />
+<xacro:property name="dynamixel_length" value="0.05" />
+<xacro:property name="dynamixel_mass" value="100.0" />
+
+<xacro:property name="distance_yaw_dynamixel_from_top_bar" value="0.24" />
+<xacro:property name="height_yaw_dynamixel_from_top_bar" value="0.0" /> 
+
+<gazebo> 
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"> 
+    <robotNamespace>/alice</robotNamespace>
+  </plugin> 
+</gazebo>
+
+
+<xacro:macro name="make_box" params="name length width height x y z roll pitch yaw mass"> 
+  <link name="${name}">
+    <collision>
+      <origin xyz="${x} ${y} ${z}" rpy="${roll} ${pitch} ${yaw}" />
+      <geometry>
+        <box size="${width} ${length} ${height}" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="${x} ${y} ${z}" rpy="${roll} ${pitch} ${yaw}" />
+      <geometry>
+        <box size="${width} ${length} ${height}" />
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="${x} ${y} ${z}" rpy="0 0 0" />
+      <mass value="${mass}" />
+      <inertia
+        ixx="${1/12*mass*(height**2 + length**2)}" ixy="0.0" ixz="0.0"
+        iyy="${1/12*mass*(width**2 + height**2)}" iyz="0.0"
+        izz="${1/12*mass*(width**2 + length**2)}" />        
+    </inertial>
+  </link>
+</xacro:macro>
+
+<xacro:make_box name="base_link" 
+                length="0.1"
+                width="0.1"
+                height="0.01"
+                x="0.05"
+                y="0.05"
+                z="0.005"
+                mass="100"
+                roll="0.0"
+                pitch="0.0"
+                yaw="0.0" />
+<xacro:make_box name="head_yaw_link" 
+                length="${dynamixel_length}"
+                width="${dynamixel_width}"
+                height="${dynamixel_height}"
+                x="${dynamixel_length/2}"
+                y="${dynamixel_width/2}"
+                z="${dynamixel_height/2}"
+                mass="${dynamixel_mass}"
+                roll="0.0"
+                pitch="0.0"
+                yaw="0.0" />
+
+<joint name="head_yaw_joint" type="revolute">
+      <origin rpy="0 0 0" xyz=" 0.00 0 0.1"/>
+      <parent link="base_link"/>
+      <child link="head_yaw_link"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="${-M_PI/2}" upper="${M_PI/2}" effort="20" velocity="${50*DEG2RAD}" />
+            <dynamics damping="50.5"/>
+    </joint>
+
+    <transmission name="head_yaw_joint_transmission">
+        <type>transmission_interface/SimpleTransmission</type>
+        <actuator name="head_yaw_joint_motor" >
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+          <mechanicalReduction>50</mechanicalReduction>
+        </actuator>
+        <joint name="head_yaw_joint" >
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+        <mechanicalReduction>50</mechanicalReduction>
+        <motorTorqueConstant>1</motorTorqueConstant>
+        <pulsesPerRevolution>10000</pulsesPerRevolution>
+    </transmission>
+
+</robot>

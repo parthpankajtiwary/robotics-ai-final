@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="coke_can">
+    <pose>0 0 0 0 0 0</pose>
+    <link name="link">
+      <inertial>
+        <mass> 0.390 </mass>
+        <inertia> 
+          <ixx>0.000528937</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000528937</iyy>
+          <iyz>0</iyz>
+          <izz>0.000121875</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.0325</radius>
+            <length>0.1</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.0325</radius>
+            <length>0.1</length>
+          </cylinder>
+        </geometry>
+        <material>  
+          <ambient>0 0 1 1.0</ambient>  
+          <diffuse>0.50754 0.50754 0.50754 1.0</diffuse>  
+          <specular>0.508273 0.508273 0.508273 1.0</specular>  
+          <emissive>0.0 0.0 0.0 0.0</emissive>  
+        </material>  
+      </visual>
+    </link>
+  </model>
+</sdf>

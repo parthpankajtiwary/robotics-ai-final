@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<robot name="alice" xmlns:xacro="http://ros.org/wiki/xacro">
+
+
+<xacro:property name="M_PI" value="3.1415926535897931"/>
+<xacro:property name="DEG2RAD" value="0.017453292" />
+
+<xacro:property name="dynamixel_height" value="0.04" />
+<xacro:property name="dynamixel_width" value="0.032" />
+<xacro:property name="dynamixel_length" value="0.05" />
+<xacro:property name="dynamixel_weight" value="0.055" />
+
+<xacro:property name="distance_yaw_dynamixel_from_top_bar" value="0.24" />
+<xacro:property name="height_yaw_dynamixel_from_top_bar" value="0.0" /> 
+
+<gazebo> 
+	<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"> 
+		<robotNamespace>/alice</robotNamespace> 
+	</plugin> 
+</gazebo>
+
+<link name="yaw_dynamixel_link">
+  <collision>
+    <origin xyz="${dynamixel_length/2} ${dynamixel_width/2} ${dynamixel_height/2}" />
+    <geometry>
+      <box size="${dynamixel_length} ${dynamixel_width} ${dynamixel_height}" />
+    </geometry>
+  </collision>
+  <visual>
+    <origin xyz="${dynamixel_length/2} ${dynamixel_width/2} ${dynamixel_height/2}" />
+    <geometry>
+      <box size="${dynamixel_length} ${dynamixel_width} ${dynamixel_height}" />
+    </geometry>
+  </visual>
+  <inertial>
+    <origin xyz="${dynamixel_length/2} ${dynamixel_width/2} ${dynamixel_height/2}" />
+    <mass value="${dynamixel_weight}" />
+    <inertia ixx="${0.0833333 * dynamixel_weight * (dynamixel_length**2 * dynamixel_height**2)}" ixy="0.0" ixz="0.0"
+        iyy="${0.0833333 * dynamixel_weight * (dynamixel_width**2 + dynamixel_height**2)}" iyz="0.0"
+        izz="${0.0833333 * dynamixel_weight * (dynamixel_width**2 + dynamixel_length**2)}" />
+  </inertial>
+</link>
+
+<joint name="base_top_to_yaw_dynamixel_link" type="fixed"> 
+  <origin rpy="0 0 0" xyz="${distance_yaw_dynamixel_from_top_bar} ${-dynamixel_width/2} ${dynamixel_height/2 + height_yaw_dynamixel_from_top_bar}"/>
+  <child link="yaw_dynamixel_link"/>
+  <parent link="top_bar"/>
+</joint>
+
+<link name="pitch_dynamixel_link">
+  <collision>
+    <origin xyz="${dynamixel_length/2} ${dynamixel_width/2} ${dynamixel_height/2}" />
+    <geometry>
+      <box size="${dynamixel_length} ${dynamixel_width} ${dynamixel_height}" />
+    </geometry>
+  </collision>
+  <visual>
+    <origin xyz="${dynamixel_length/2} ${dynamixel_width/2} ${dynamixel_height/2}" />
+    <geometry>
+      <box size="${dynamixel_length} ${dynamixel_width} ${dynamixel_height}" />
+    </geometry>
+  </visual>
+  <inertial>
+    <origin xyz="${dynamixel_length/2} ${dynamixel_width/2} ${dynamixel_height/2}" />
+    <mass value="${dynamixel_weight}" />
+    <inertia ixx="${0.0833333 * dynamixel_weight * (dynamixel_length**2 * dynamixel_height**2)}" ixy="0.0" ixz="0.0"
+        iyy="${0.0833333 * dynamixel_weight * (dynamixel_width**2 + dynamixel_height**2)}" iyz="0.0"
+        izz="${0.0833333 * dynamixel_weight * (dynamixel_width**2 + dynamixel_length**2)}" />
+  </inertial>
+</link>
+
+<joint name="head_yaw_joint" type="revolute">
+  <origin rpy="${M_PI/2} 0.0 0.0" xyz="0.02 ${dynamixel_width/2 + dynamixel_height/2} ${dynamixel_height/2 + dynamixel_width/2 + 0.01}"/>
+  <parent link="yaw_dynamixel_link"/>
+  <child link="pitch_dynamixel_link"/>
+  <axis xyz="0 0 1"/>
+  <limit lower="0" upper="${M_PI}" effort="200" velocity="${50*DEG2RAD}"/>
+  <dynamics damping="50.5"/>
+</joint>
+<transmission name="head_yaw_joint_trans">
+  <type>transmission_interface/SimpleTransmission</type>
+  <actuator name="head_yaw_joint_motor" >
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+  <joint name="head_yaw_joint">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+</transmission>
+
+
+
+</robot>
