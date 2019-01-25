@@ -1,0 +1,8 @@
+<launch> 
+    <!-- launch laser -->
+    <include file="$(find laser)/launch/laser.launch" />
+    <!-- launch front xtion -->
+    <include file="$(find alice_nav)/launch/front_xtion.launch" />
+    <!-- launch back xtion -->
+    <include file="$(find alice_nav)/launch/back_xtion.launch" />
+</launch>

@@ -1,0 +1,32 @@
+<launch>
+
+	<arg name="map" default="map"/> 
+	<!-- Run the map server -->
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find alice_nav)/maps/'$(arg map)'.yaml"/>
+	
+	<!--node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
+    	<rosparam command="load" file="$(find laser)/config/laser_config.yaml" />
+  	</node-->
+	
+	<!--- Run AMCL -->
+	<node pkg="amcl" type="amcl" name="amcl">
+		<param name="base_frame_id" value="base_footprint"/>
+		<param name="scan" value="scan_filtered" />
+	</node>
+
+	<!-- Run move_base -->
+	<node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
+		<rosparam file="$(find alice_nav)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+		<rosparam file="$(find alice_nav)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+		<rosparam file="$(find alice_nav)/config/local_costmap_params.yaml" command="load" />
+		<rosparam file="$(find alice_nav)/config/global_costmap_params.yaml" command="load" />
+		<rosparam file="$(find alice_nav)/config/base_local_planner_params.yaml" command="load" />
+		<param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+		<param name="base_global_planner" value="global_planner/GlobalPlanner" />
+		<param name="planner_frequency" value="5.0" />
+		<param name="controller_frequency" value="10" />
+		<param name="max_planning_retries" value="3" />
+		<param name="clearing_rotation_allowed" value="false" />
+	</node>
+</launch>
+

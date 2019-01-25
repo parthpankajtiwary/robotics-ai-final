@@ -1,0 +1,6 @@
+# Define the goal
+string anything
+---
+# Define the result
+uint32[] classes
+---

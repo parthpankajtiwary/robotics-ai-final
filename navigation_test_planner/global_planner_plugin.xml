@@ -1,0 +1,6 @@
+<library path="lib/libglobal_planner_lib">
+	<class name="test_planner/GlobalPlanner" type="test_planner::GlobalPlanner" base_class_type="nav_core::BaseGlobalPlanner" >
+	</class>
+	<class name="test_planner/GlobalPlannerPython" type="test_planner::GlobalPlannerPython" base_class_type="nav_core::BaseGlobalPlanner" >
+	</class>
+</library>

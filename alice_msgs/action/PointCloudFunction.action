@@ -1,0 +1,18 @@
+# Goal
+string function #find_table/find_closest_point/find_clusters
+string transform_to_link
+string return_type #largest/closest/all
+geometry_msgs/Point filter_min
+geometry_msgs/Point filter_max
+geometry_msgs/Point point
+int32 min_cluster_points
+int32 max_cluster_points
+float32 cluster_distance
+float32 flat_surface_threshold
+int32 k
+---
+# Result
+geometry_msgs/Point[] min_point # for dimensions
+geometry_msgs/Point[] max_point # for dimensions
+geometry_msgs/Point[] point     # for single points
+---
