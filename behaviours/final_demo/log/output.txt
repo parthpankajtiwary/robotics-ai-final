@@ -1,0 +1,13 @@
+h14m48s14:tts == Ready to receive order
+h14m48s28:tts == I am looking for TomatoSoup and Evergreen and BaseTech and UsbHub and Eraserbox on tables Table2
+h14m48s28:tts == Moving to table2
+h14m49s47:tts ==  I see Evergreen
+h14m49s47:tts == grabbing Evergreen
+h14m49s58:tts == grabbing Evergreen
+h14m50s16:tts == grabbing Evergreen
+h14m50s27:tts == grabbing Evergreen
+h14m51s49:tts ==  I see UsbHub and Evergreen and TomatoSoup
+h14m51s49:tts == Ive been grabbing too long. I am sad now.
+h14m51s55:tts == Moving to drop-off
+h14m52s58:tts == Look I have found a Evergreen
+h14m52s58:tts == Ready to receive order

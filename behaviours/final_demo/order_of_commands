@@ -1,0 +1,20 @@
+roscore: roscore
+gazebo: roslaunch alice_gazebo small_room.launch
+place objects: rosrun alice_gazebo set_objects_on_tables.py
+rviz: rviz
+moveit: roslaunch m1n6s200_moveit_config m1n6s200_gazebo_demo.launch 
+nav_alice: roslaunch alice_nav alice_dijkstra.launch map:=simulation
+djikstra service: python navigation_test_planner/scripts/dijkstra_planning.py
+
+grasp: python grasp_objects.py
+dir:/home/student/sudo/ros/catkin_ws/src/behaviours/scripts/behaviours/final_demo
+
+run_mission_control: roslaunch behaviours run_behaviour.launch file:=mission_control
+
+
+
+
+
+
+
+

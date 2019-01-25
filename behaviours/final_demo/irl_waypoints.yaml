@@ -1,0 +1,32 @@
+table3:
+  position: 
+    x: 1.673
+    y: -1.476
+    z: 0
+  orientation: 
+    x: 0
+    y: 0
+    z: -0.73
+    w: 0.676
+table4:
+  position: 
+    x: -0.953
+    y: -1.164
+    z: 0
+  orientation: 
+    x: 0
+    y: 0
+    z: 0.999
+    w: 0.039
+table5:
+  position: 
+    x: -1.039
+    y: 0.351
+    z: 0
+  orientation: 
+    x: 0
+    y: 0
+    z: 0.699
+    w: 0.715
+
+

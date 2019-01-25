@@ -1,0 +1,37 @@
+h14m4s39:tts == Ready to receive order
+h14m4s52:tts == I am looking for TomatoSoup on tables Table1 and Table2
+h14m4s52:tts == Moving to table1_left
+h14m6s0:tts ==  I see Eraserbox
+h14m6s6:tts == Moving to table1_right
+h14m7s44:tts ==  I see TomatoSoup and TomatoSoup
+h14m7s44:tts == grabbing TomatoSoup
+h14m9s27:tts ==  I see BaseTech and Evergreen
+h14m9s34:tts == Moving to table2
+h14m11s15:tts ==  I see UsbHub and Evergreen
+h14m11s21:tts == Moving to drop-off
+h14m12s16:tts == Look I have found a TomatoSoup
+h14m12s17:tts == Ready to receive order
+h14m13s59:tts == I am looking for TomatoSoup and Evergreen and BaseTech and UsbHub and Eraserbox on tables Table1
+h14m13s59:tts == Moving to table1_left
+h14m15s42:tts == Ready to receive order
+h14m15s57:tts == I am looking for TomatoSoup and Evergreen and BaseTech and UsbHub and Eraserbox on tables Table1
+h14m15s57:tts == Moving to table1_left
+h14m17s11:tts ==  I see TomatoSoup
+h14m17s11:tts == grabbing TomatoSoup
+h14m19s5:tts == grabbing TomatoSoup
+h14m20s31:tts ==  I see Evergreen and Eraserbox and BaseTech
+h14m20s31:tts == grabbing Eraserbox
+h14m20s45:tts == grabbing Eraserbox
+h14m21s2:tts == Ive been grabbing too long. I am sad now.
+h14m21s9:tts == Moving to table1_right
+h14m22s54:tts == grabbing TomatoSoup
+h14m24s27:tts == grabbing Evergreen
+h14m26s24:tts ==  I see TomatoSoup and BaseTech
+h14m26s24:tts == grabbing TomatoSoup
+h14m27s22:tts ==  I see Evergreen
+h14m27s22:tts == grabbing Evergreen
+h14m27s48:tts ==  I see TomatoSoup and Evergreen
+h14m27s48:tts == Ive been grabbing too long. I am sad now.
+h14m27s55:tts == Moving to drop-off
+h14m28s44:tts == Look I have found a TomatoSoup
+h14m28s44:tts == Ready to receive order

@@ -1,0 +1,12 @@
+- name: start
+  orientation: {w: 0.003, x: 0.0, y: 0.0, z: 1.0}
+  position: {x: 1.517, y: 3.921, z: 0.0}
+- name: corner1
+  orientation: {w: 0.708, x: 0.0, y: 0.0, z: -0.706}
+  position: {x: 1.956, y: 2.026, z: 0.0}
+- name: corner2
+  orientation: {w: 0.006, x: 0.0, y: 0.0, z: 1.0}
+  position: {x: -0.62, y: 1.955, z: 0.0}
+- name: table2
+  orientation: {w: 1.0, x: 0.0, y: 0.0, z: -0.004}
+  position: {x: -0.589, y: 3.672, z: 0.0}

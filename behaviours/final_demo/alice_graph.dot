@@ -1,0 +1,13 @@
+digraph G {
+"Start" -> "mid_center"
+
+"mid_left" -> "mid_right" [dir=both]
+"mid_left" -> "Table1_left" [dir=both]
+"mid_left" -> "Table2" [dir=both]
+"mid_right" -> "Table1_right" [dir=both]
+
+"mid_left" -> "mid_center" [dir=both]
+"mid_right" -> "mid_center" [dir=both]
+
+"mid_center" -> "drop-off" [dir=both]
+}

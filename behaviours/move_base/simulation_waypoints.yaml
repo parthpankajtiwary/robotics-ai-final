@@ -1,0 +1,24 @@
+- name: table2
+  orientation: {w: 1.0, x: 0.0, y: 0.0, z: 0.002}
+  position: {x: 2.708, y: 2.582, z: 0.0}
+- name: table1_left
+  orientation: {w: 0.005, x: 0.0, y: 0.0, z: 1.0}
+  position: {x: 1.555, y: 3.855, z: 0.0}
+- name: table1_right
+  orientation: {w: 1.0, x: 0.0, y: 0.0, z: 0.004}
+  position: {x: -0.957, y: 3.880, z: 0.0}
+- name: mid_left
+  orientation: {w: -0.019, x: 0.0, y: 0.0, z: 1.0}
+  position: {x: 2.007, y: 2.016, z: 0.0}
+- name: mid_right
+  orientation: {w: 1.0, x: 0.0, y: 0.0, z: 0.001}
+  position: {x: -0.907, y: 1.907, z: 0.0}
+- name: mid_center
+  orientation: {w: 0.712, x: 0.0, y: 0.0, z: -0.702}
+  position: {x: 1.109, y: 2.054, z: 0.0}
+- name: drop-off
+  orientation: {w: 0.71, x: 0.0, y: 0.0, z: -0.704}
+  position: {x: 1.21, y: 0.758, z: 0.0}
+- name: start
+  orientation: {w: 1.0, x: 0.0, y: 0.0, z: 0.001}
+  position: {x: 0.742, y: 2.456, z: 0.0}
