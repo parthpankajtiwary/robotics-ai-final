@@ -8,8 +8,8 @@ pub = rospy.Publisher("order", Order, queue_size=1)
 rospy.sleep(2)
 
 order_message = Order()
-order_message.objects = ["TomatoSoup", "Evergreen", "BaseTech", "UsbHub", "Eraserbox"]
-order_message.locations = ["Table1"]
+order_message.objects = ["TomatoSoup", "UsbHub"]
+order_message.locations = ["Table1", "Table2"]
 
 pub.publish(order_message)
 
