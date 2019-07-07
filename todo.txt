@@ -1,0 +1,6 @@
+fix orientations
+neural nettwork shape reception
+neural network color channel processing
+neural network testset accuracy
+grasping
+fallback behaviours
