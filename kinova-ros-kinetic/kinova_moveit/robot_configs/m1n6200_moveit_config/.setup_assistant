@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: alice_description
+    relative_path: urdf/alice_sim.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/m1n6s200.srdf
+  CONFIG:
+    author_name: Rik
+    author_email: r.p.timmers@rug.nl
+    generated_timestamp: 1547741985

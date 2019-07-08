@@ -1,0 +1,7 @@
+<launch>
+  <node pkg="alice_pointcloud" name="voxelize" type="voxel_node">
+    <param name="input_topic" type="string" value="camera/depth_registered/points" />
+    <param name="output_topic" type="string"  value="camera_voxel_grid/output" />
+    <param name="leaf_size" type="double" value="0.05" />
+  </node>
+</launch>
