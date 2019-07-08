@@ -74,6 +74,8 @@ add_service_files(
    alicecontrollerfunction.action
    aliceapproach.action
    ObjectROI.action
+   RecogniseObjects.action
+   GraspObjects.action
  )
 
 ## Generate added messages and services with any dependencies listed here
