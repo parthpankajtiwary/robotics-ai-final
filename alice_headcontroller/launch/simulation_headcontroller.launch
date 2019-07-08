@@ -1,0 +1,13 @@
+<launch>
+  <node name="get_topic_type_service" pkg="alice_headcontroller" type="rostopic_service.py" output="screen"/>
+  
+  <node name="head_controller" pkg="alice_headcontroller" type="alice_headcontroller_node" output="screen">
+    <param name="pitch_state_topic" value="/alice/tilt_controller/state" />
+    <param name="yaw_state_topic" value="/alice/pan_controller/state" />
+    <param name="pitch_command_topic" value="/alice/tilt_controller/command" />
+    <param name="yaw_command_topic" value="/alice/pan_controller/command" /> 
+  </node>
+  
+  <node name="init_head_position" pkg="alice_headcontroller" type="init_head_position.py" />
+
+</launch>

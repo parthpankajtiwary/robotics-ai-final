@@ -1,0 +1,82 @@
+<launch>
+      <arg name="use_sim_time" default="true"/>
+      <arg name="paused" default="false"/>
+      <!--Set use sim_time flag -->
+      <group if="$(arg use_sim_time)">
+        <param name="/use_sim_time" value="true" />
+      </group>
+
+      <arg name="model" default="Alice"/>
+      <arg name="world" default="small_room.world"/>
+
+      <param name="robot_description" command="$(find xacro)xacro --inorder '$(find alice_description)urdf/alice_sim.xacro'"/>
+
+      <!--rosparam file="$(find kinova_control)/config/gazebo_controller.yaml" command="load" /-->
+
+      <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+      <!--include file="$(find gazebo_ros)/launch/willowgarage_world.launch" -->
+      <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+        <!--arg name="paused" value="$(arg paused)"/-->
+  	  <arg name="world_name" value="$(find alice_gazebo)/worlds/'$(arg world)'" />
+      <!-- more default parameters can be changed here -->
+        <arg name="gui" value="true"/>
+      </include>
+
+      !-- Spawn Alice into Gazebo -->
+      <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg model) -param robot_description -z 0.04 -x 1 -y 2"/>
+       
+      <!-- ros_control launch file -->
+      <include file="$(find kinova_control)/launch/kinova_control.launch">
+        <arg name="kinova_robotName" value="m1n6s200"/>
+        <arg name="kinova_robotType" value="m1n6s200"/>
+        <arg name="use_trajectory_controller" value="true"/>
+        <arg name="is7dof" value="false"/>
+      </include>
+        
+      <!-- Loads ros controllers parameters for gazebo-->
+      <rosparam file="$(find alice_description)/urdf/alice_control.yaml" command="load"/>
+
+      <!-- Loads controller manager to actually simulate joint movements -->
+      <node name="joint_state_controller" pkg="controller_manager" type="spawner" output="screen" ns="/alice"
+      args="pan_controller tilt_controller joint_state_controller" />
+        
+      <!--param name="use_gui" value="True"/-->
+      <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">["alice_joint_states", "m1n6s200/joint_states"]</rosparam>
+      </node>
+      <node name="robot_state_publisher2" pkg="robot_state_publisher" type="state_publisher" > 
+          <remap from="/joint_states" to="/alice/joint_states" />
+      </node>
+      
+       <node name="voxelize" pkg="alice_pointcloud" type="voxel_node"> 
+        <param name="input_topic" type="string" value="front_xtion/depth/points" />
+        <param name="output_topic" type="string"  value="front_xtion_voxel_grid/output" />
+        <param name="leaf_size" type="double" value="0.005" />
+        <param name="hz" type="int" value="5" />
+      </node>
+      
+      <node name="voxelize_back_xtion" pkg="alice_pointcloud" type="voxel_node"> 
+        <param name="input_topic" type="string" value="back_xtion/depth/points" />
+        <param name="output_topic" type="string"  value="back_xtion_voxel_grid/output" />
+        <param name="leaf_size" type="double" value="0.05" />
+        <param name="hz" type="int" value="15" />
+      </node>
+      
+
+      
+      <include file="$(find alice_headcontroller)/launch/simulation_headcontroller.launch" />
+      
+      <node name="point_cloud_functions" pkg="alice_pointcloud" type="point_cloud_functions_node" output="screen">  
+        <param name="cloud_topic" value="front_xtion/depth/points" />
+      </node>
+      <node name="alice_approach" pkg="alice_approach" type="alice_approach_node" output="screen" />
+      <node name="alice_controller" pkg="alice_controller" type="alice_controller_node" />
+      
+      <node name="nullify_movement" pkg="alice_gazebo" type="nullify_movement.py"/>
+
+      <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
+      <rosparam command="load" file="$(find laser)/config/laser_config.yaml" />
+      </node>
+
+     
+</launch>
