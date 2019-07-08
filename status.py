@@ -56,7 +56,6 @@ class TestNavigation(unittest.TestCase):
                 start = self.graph.waypoint_of(start_node)#['position']
                 end = self.graph.waypoint_of(end_node)#['position']
                 output = self.graph.assign_orientation(start, end)
-                # output = assign_orientation(start, end, self.graph.waypoint_of(end_node)['name'])
 
                 expected_outcome = output in outcomes[(start_node, end_node)]
                 if not expected_outcome:

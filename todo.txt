@@ -1,6 +1,7 @@
-fix orientations
-neural nettwork shape reception
-neural network color channel processing
-neural network testset accuracy
-grasping
-fallback behaviours
+done - fix orientations
+
+not  - neural nettwork shape reception
+not  - neural network color channel processing
+not  - neural network testset accuracy
+not  - grasping
+not  - fallback behaviours
