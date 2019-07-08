@@ -7,7 +7,6 @@ from alice_msgs.msg import aliceapproachAction, aliceapproachGoal
 from alice_msgs.msg import alicecontrollerfunctionAction, alicecontrollerfunctionGoal
 import yaml, actionlib, rospy
 import parse_graph
-from orientation import assign_orientation
 from tts import TTS
 
 class final_demo(AbstractBehaviour):
@@ -141,9 +140,9 @@ class final_demo(AbstractBehaviour):
         path = [start] + path
         path = [self.graph.waypoint_of(node) for node in path]
         for idx, _ in enumerate(path[1:]):
-            start = path[idx-1]['position']
-            end = path[idx]['position']
-            path[idx]['orientation'] = assign_orientation(start, end, path[idx]['name'])
+            start = path[idx-1]
+            end = path[idx]
+            path[idx]['orientation'] = self.graph.assign_orientation(start, end)
         return path[1:]
 
     def targets(self):
