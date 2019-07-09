@@ -14,13 +14,15 @@ validationData = np.load(NPY_STORAGE + "testData.npy")
 validationLabels = np.load(NPY_STORAGE + "testLabels.npy")
 
 
-N_BATCHES = 150  #N batches
-N_ITERATIONS = 2000
+N_BATCHES = 120  #N batches
+N_ITERATIONS = 4
 
-MAKE_CHECKPOINT_EACH_N_ITERATIONS = 10
+MAKE_CHECKPOINT_EACH_N_ITERATIONS = 3
 CHECKPOINT_DIR = "./checkpoint/network.ckpt"
+CHECKPOINT_DIR2 = "./checkpoint/"
+CHECKPOINT_NAME = 'network'
 
-PRINT_ACC_EVERY_N_EPOCHS = 5
+PRINT_ACC_EVERY_N_EPOCHS = 1
 config = tf.ConfigProto()
 config.gpu_options.allow_growth=True
 session_recog = tf.InteractiveSession(config = config)
@@ -32,6 +34,7 @@ dataBatches = np.array_split(trainData, N_BATCHES)
 labelBatches = np.array_split(trainLabels, N_BATCHES)
 
 nData = len(trainData)
+print('nData', nData)
 remainder_train = nData % N_BATCHES
 batchsize = int(nData / N_BATCHES)
 nBatches = int(nData / batchsize)
@@ -62,9 +65,9 @@ def train():
       else:
         network.train_batch(data, labels)
     if epoch % PRINT_ACC_EVERY_N_EPOCHS == 0:
-      print "@epoch ", epoch, "/", N_ITERATIONS, " validation accuracy = ", test()
+      print("@epoch ", epoch, "/", N_ITERATIONS, " validation accuracy = ", test())
     if epoch % MAKE_CHECKPOINT_EACH_N_ITERATIONS == 0 and epoch != 0:
-        network.store_checkpoint(CHECKPOINT_DIR)
+        network.store_checkpoint(CHECKPOINT_NAME)
 
 def test():
 
@@ -90,5 +93,8 @@ def test():
   runningAvg /= counter
   return runningAvg
 if __name__ == "__main__":
-
   train()
+
+  with tf.InteractiveSession().as_default() as sess:
+      net = Network(sess)
+      net.load_checkpoint(CHECKPOINT_NAME)
