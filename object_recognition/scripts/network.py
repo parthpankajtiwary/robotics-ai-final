@@ -214,10 +214,18 @@ class Network():
         self.correct_prediction = tf.equal(tf.argmax(y ,1), tf.argmax(self.target_output,1), name = "correct")
         self.accuracy = tf.reduce_mean(tf.cast(self.correct_prediction, tf.float32), name = "accuracy")
 
+        variables_to_restore = []
+        for var in tf.contrib.framework.get_variables_to_restore():
+            if 'Adam' in var.name:
+                continue
+            print(var)
+            variables_to_restore.append(var)
+        self.saver = tf.train.Saver(variables_to_restore)#
+        # self.saver = tf.train.Saver()
+
         with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
             self.train_step = tf.train.AdamOptimizer(self.learningRate).minimize(self.cross_entropy)
 
-        self.saver = tf.train.Saver()
         # self.summary_writer = tf.summary.FileWriter(self.logdir, self.sess.graph)
 
         self.sess.run(tf.global_variables_initializer())
